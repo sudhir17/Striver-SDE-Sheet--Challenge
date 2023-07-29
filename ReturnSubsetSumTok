@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static void func(int ind,int sum,ArrayList<Integer> arr,int k,ArrayList<Integer> list,ArrayList<ArrayList<Integer>> ans)
+    {
+        if(ind==arr.size())
+        {
+            if(sum==k)
+                ans.add(new ArrayList<>(list));
+            return;
+        }
+        func(ind+1,sum,arr,k,list,ans);
+        list.add(arr.get(ind));
+        func(ind+1,sum+arr.get(ind),arr,k,list,ans);
+        list.remove(list.size()-1);
+    }
+    public static ArrayList<ArrayList<Integer>> findSubsetsThatSumToK(ArrayList<Integer> arr, int n, int k) 
+	{
+        // Write your code here.
+        ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+        func(0,0,arr,k,new ArrayList<>(),ans);
+        return ans;
+    }
+}
